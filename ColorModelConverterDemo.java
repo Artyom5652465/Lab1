@@ -40,11 +40,11 @@ import java.awt.color.*;
         int b = color.getBlue();
         rgbLabel.setText("RGB: " + r + ", " + g + ", " + b);
 
-        float c = 1 - (float)r / 255;
-        float m = 1 - (float)g / 255;
-        float y = 1 - (float)b / 255;
-        float k = 1 - Math.max(Math.max(c, m), y);
-        cmykLabel.setText("CMYK: " + (int)(c*100) + ", " + (int)(m*100) + ", " + (int)(y*100) + ", " + (int)(k*100));
+        float rf = (float)r / 255;
+        float gf = (float)g / 255;
+        float bf = (float)b / 255;
+        float k = 1 - Math.max(Math.max(rf, gf), bf);
+        cmykLabel.setText("CMYK: " + (int)((1-rf-k)/(1-k)*255) + ", " + (int)((1-gf-k)/(1-k)*255) + ", " + (int)((1-bf-k)/(1-k)*255) + ", " + (int)(k*255));
 
         float[] hsv = Color.RGBtoHSB(r, g, b, null);
         hsvLabel.setText("HSV: " + (int)(hsv[0]*360) + ", " + (int)(hsv[1]*100) + ", " + (int)(hsv[2]*100));
